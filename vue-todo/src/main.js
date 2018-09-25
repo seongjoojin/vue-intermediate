@@ -1,15 +1,9 @@
 import Vue from "vue"
 import App from "./App.vue"
-import { library } from "@fortawesome/fontawesome-svg-core"
-import { faCoffee } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome"
+import "vue-awesome/icons"
+import Icon from "vue-awesome/components/Icon"
 
-library.add(faCoffee)
-
-Vue.component("font-awesome-icon", FontAwesomeIcon)
-
-Vue.config.productionTip = false
-
+Vue.component("v-icon", Icon)
 new Vue({
   render: h => h(App)
 }).$mount("#app")
