@@ -2,12 +2,19 @@
     <div>
         <ul>
             <li
-                v-for="todoItem in todoItems"
-                v-bind:key="todoItem.key"
+                v-for="(todoItem, index) in todoItems"
+                v-bind:key="todoItem.item.key"
                 class="shadow"
             >
-                {{ todoItem }}
-                <span class="removeBtn" v-on:click="removeTodo">
+                <span 
+                    class="checkBtn"
+                    v-bind:class="{checkBtnCompleted:todoItem.completed}"
+                    v-on:click="toggleComplete(todoItem, index)" 
+                >
+                    <v-icon name="check" />
+                </span>
+                <span v-bind:class="{textCompleted:todoItem.completed}">{{ todoItem.item }}</span>
+                <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
                     <v-icon name="trash-alt" />
                 </span>
             </li>
@@ -29,13 +36,22 @@ export default {
           localStorage.key(i) !== "Bitdefender_Block" &&
           localStorage.key(i) !== "loglevel:webpack-dev-server"
         ) {
-          this.todoItems.push(localStorage.key(i))
+          this.todoItems.push(
+            JSON.parse(localStorage.getItem(localStorage.key(i)))
+          )
         }
       }
     }
   },
   methods: {
-    removeTodo: function() {}
+    removeTodo: function(todoItem, index) {
+      this.todoItems.splice(index, 1)
+      localStorage.removeItem(todoItem)
+    },
+    toggleComplete: function(todoItem, index) {
+      todoItem.completed = !todoItem.completed
+      localStorage.setItem(todoItem.item, JSON.stringify(todoItem))
+    }
   }
 }
 </script>
@@ -65,6 +81,7 @@ li {
   line-height: 45px;
   color: #62acde;
   margin-right: 5px;
+  margin-top: 5px;
 }
 .checkBtnCompleted {
   color: #b3adad;
