@@ -4,14 +4,27 @@
         <span class="addContainer" @click="addTodo">
           <v-icon name="plus" class="addBtn plus" />
         </span>
+        <Modal v-if="showModal" @close="showModal = false">
+          <!--
+            you can use custom content here to overwrite
+            default content
+          -->
+          <h3 slot="header">custom header</h3>
+        </Modal>
     </div>
 </template>
 
 <script>
+import Modal from "./common/Modal"
+
 export default {
+  components: {
+    Modal: Modal
+  },
   data: function() {
     return {
-      newTodoItem: ""
+      newTodoItem: "",
+      showModal: false
     }
   },
   methods: {
@@ -19,6 +32,8 @@ export default {
       if (this.newTodoItem !== "") {
         this.$emit("addTodoItem", this.newTodoItem)
         this.clearInput()
+      } else {
+        alert("type sth")
       }
     },
     clearInput: function() {
