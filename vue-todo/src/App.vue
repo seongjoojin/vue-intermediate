@@ -54,7 +54,7 @@ export default {
       this.todoItems.splice(index, 1)
     },
     toggleOneItem: function(todoItem, index) {
-      this.todoItem[index].completed = !this.todoItem[index].completed
+      todoItem.completed = !todoItem.completed
       localStorage.setItem(todoItem.item, JSON.stringify(todoItem))
     },
     clearAllItems: function() {
