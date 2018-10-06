@@ -20,7 +20,7 @@ import Modal from "./common/Modal"
 
 export default {
   components: {
-    Modal: Modal
+    Modal
   },
   data() {
     return {
