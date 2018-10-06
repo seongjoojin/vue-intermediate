@@ -18,7 +18,7 @@ import TodoList from "./components/TodoList.vue"
 import TodoFooter from "./components/TodoFooter.vue"
 
 export default {
-  data: function() {
+  data() {
     return {
       todoItems: []
     }
@@ -29,7 +29,7 @@ export default {
     TodoList: TodoList,
     TodoFooter: TodoFooter
   },
-  created: function() {
+  created() {
     if (localStorage.length > 0) {
       for (let i = 0; i < localStorage.length; i++) {
         if (
@@ -44,20 +44,20 @@ export default {
     }
   },
   methods: {
-    addOneItem: function(todoItem) {
+    addOneItem(todoItem) {
       const obj = { completed: false, item: todoItem }
       localStorage.setItem(todoItem, JSON.stringify(obj))
       this.todoItems.push(obj)
     },
-    removeOneItem: function(todoItem, index) {
+    removeOneItem(todoItem, index) {
       localStorage.removeItem(todoItem.item)
       this.todoItems.splice(index, 1)
     },
-    toggleOneItem: function(todoItem, index) {
+    toggleOneItem(todoItem, index) {
       todoItem.completed = !todoItem.completed
       localStorage.setItem(todoItem.item, JSON.stringify(todoItem))
     },
-    clearAllItems: function() {
+    clearAllItems() {
       this.todoItems = []
       localStorage.clear()
     }
