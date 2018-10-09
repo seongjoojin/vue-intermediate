@@ -53,7 +53,7 @@ export default {
       localStorage.removeItem(todoItem.item)
       this.todoItems.splice(index, 1)
     },
-    toggleOneItem(todoItem, index) {
+    toggleOneItem(todoItem) {
       todoItem.completed = !todoItem.completed
       localStorage.setItem(todoItem.item, JSON.stringify(todoItem))
     },
