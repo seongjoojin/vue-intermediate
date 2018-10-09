@@ -28,3 +28,10 @@ let sum = () => {
 ##### Flux 패턴의 단방향 데이터 흐름
 
 - 데이터의 흐름이 여러 갈래로 나뉘지 않고 단방향으로만 처리
+
+# Vuex 기술 요소
+
+- state: 여러 컴포넌트에 공유되는 데이터 data
+- getters: 연산된 state 값을 접근하는 속성 computed
+- mutations: state 값을 변경하는 이벤트 로직, 메서드 method
+- action: 비동기 처리 로직을 선언하는 메서드 aysnc method
