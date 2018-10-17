@@ -9,12 +9,12 @@
                 <span 
                     class="checkBtn"
                     v-bind:class="{checkBtnCompleted:todoItem.completed}"
-                    v-on:click="toggleComplete(todoItem, index)" 
+                    v-on:click="toggleComplete({todoItem, index})" 
                 >
                     <v-icon name="check" />
                 </span>
                 <span v-bind:class="{textCompleted:todoItem.completed}">{{ todoItem.item }}</span>
-                <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
+                <span class="removeBtn" v-on:click="removeTodo({todoItem, index})">
                     <v-icon name="trash-alt" />
                 </span>
             </li>
@@ -23,16 +23,14 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex"
+import { mapGetters, mapMutations } from "vuex"
 
 export default {
   methods: {
-    removeTodo(todoItem, index) {
-      this.$store.commit("removeOneItem", { todoItem, index })
-    },
-    toggleComplete(todoItem, index) {
-      this.$store.commit("toggleOneItem", { todoItem, index })
-    }
+    ...mapMutations({
+      removeTodo: "removeOneItem",
+      toggleComplete: "toggleOneItem"
+    })
   },
   computed: {
     ...mapGetters(["storedTodoItems"])
